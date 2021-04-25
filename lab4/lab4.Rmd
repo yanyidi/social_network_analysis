@@ -1,0 +1,40 @@
+---
+title: "lab4"
+author: "Yidi Yan"
+date: "07/02/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+install.packages(c("rtweet", "ggplot2", "netCoin"))
+install.packages("igraph")
+library(rtweet)
+library(igraph)
+library(ggplot2)
+library(netCoin)
+```
+
+
+```{r}
+search.results <- read_twitter_csv("brexit_data_lab4/search-results-brexit.csv")
+```
+
+```{r}
+
+colnames(search.results) # this tells you the names of the different kinds of information returned
+View(search.results) # this opens the data in a new tab
+
+nrow(search.results) # this is the number of tweets
+length(unique(search.results$screen_name)) # this is the number of users
+min(search.results$created_at) # the date and time of the earliest tweet
+max(search.results$created_at) # the date and time of the last tweet
+
+# you can also plot the frequency of posts over time
+ts_plot(search.results, "5 minutes") # note that you can adjust this interval to 'smooth' the results
+
+```
